@@ -6,7 +6,7 @@ Dự án này sử dụng [NestJS](https://nestjs.com/) để xây dựng API, h
 
 ## 📋 Yêu cầu hệ thống
 
-- **Node.js** >= 22.11.x
+- **Node.js** = 22.11.0
 - **NPM** hoặc **Yarn**
 - **Cơ sở dữ liệu**: MongoDB, MySQL
 
@@ -22,17 +22,32 @@ $ npm install  # Hoặc dùng yarn
 $ yarn install
 ```
 
-## ⚙️ Cấu hình
-
-Sao chép file `.env.example` thành `.env` và cập nhật các biến môi trường phù hợp với hệ thống của bạn.
-
 ## ▶️ Chạy dự án
+
+### ⚙️ Cấu hình
+
+Sao chép file `.env.example` sang `.env` và cập nhật các biến môi trường phù hợp với hệ thống của bạn.
 
 ```sh
 # Chạy dự án ở chế độ development
-$ npm run start:dev  # Hoặc dùng yarn
+$ npm run start:dev
+
+# Hoặc dùng yarn
 $ yarn start:dev
 ```
+
+## ▶️ Chạy dự án với docker
+
+### ⚙️ Cấu hình
+
+Sao chép file `.env.example` sang `.env` và giữ nguyên các biến môi trường để hoạt động được tốt nhất.
+
+```sh
+# Chạy dự án ở chế độ development
+$ docker compose up -d
+```
+
+📌 Sau khi chạy dự án, bạn truy cập vào swagger: http://localhost:3000/api/docs
 
 ---
 
@@ -49,7 +64,7 @@ $ yarn start:dev
 
 | Method  | Endpoint                           | Mô tả                             |
 | ------- | ---------------------------------- | --------------------------------- |
-| `GET`   | `/user/get-info`                   | Lấy thông tin người dùng theo ID  |
+| `GET`   | `/user/get-info`                   | Lấy thông tin người dùng          |
 | `PATCH` | `/user/updateUser`                 | Cập nhật thông tin người dùng     |
 | `POST`  | `/user/register-course`            | Đăng ký khóa học                  |
 | `POST`  | `/user/cancel-course`              | Hủy đăng ký khóa học              |
@@ -65,7 +80,5 @@ $ yarn start:dev
 | `GET`    | `/course`                   | Lấy danh sách khóa học          |
 
 ---
-
-📌 **Lưu ý**: Một số API yêu cầu xác thực bằng token, vui lòng kiểm tra tài liệu hoặc liên hệ với đội ngũ phát triển để biết thêm chi tiết.
 
 💡 **Tác giả**: [IT-NVC](https://github.com/IT-NVC)

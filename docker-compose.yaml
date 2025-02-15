@@ -12,14 +12,7 @@ services:
         condition: service_healthy
       mysql:
         condition: service_healthy
-    environment:
-      - MONGO_URI=mongodb://mongodb:27017/online_courses_management
-      - MYSQL_HOST=mysql
-      - MYSQL_PORT=3306
-      - MYSQL_USER=nestcourse
-      - MYSQL_PASSWORD=nestpassword
-      - MYSQL_DATABASE=online_courses_management
-      - USER_SECRET_KEY=aaaaaaaaaaaaaaaa
+    env_file: .env
     networks:
       - online_courses_management
 
@@ -34,7 +27,7 @@ services:
     networks:
       - online_courses_management
     healthcheck:
-      test: ["CMD", "mongo", "--eval", "db.runCommand({ ping: 1 })"]
+      test: ["CMD", "mongosh", "--eval", "db.runCommand({ ping: 1 })"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -55,7 +48,7 @@ services:
     networks:
       - online_courses_management
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "nestcourse", "-pnestpassword"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p123456"]
       interval: 10s
       timeout: 5s
       retries: 5
