@@ -13,11 +13,10 @@ import { CourseModule } from './modules/course/course.module';
 import { CourseController } from './modules/course/course.controller';
 import { UserController } from './modules/user/user.controller';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, 
+      isGlobal: true,
     }),
     ConfigDatabaseModule,
     // MongoDB Connection
@@ -41,14 +40,11 @@ import { UserController } from './modules/user/user.controller';
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
+    consumer.apply(UserAuthMiddleware);
+    consumer.apply(UserAuthMiddleware).forRoutes(UserController);
     consumer
       .apply(UserAuthMiddleware)
-      consumer.apply(UserAuthMiddleware).exclude(
-        { path: 'user/getUser/:id', method: RequestMethod.GET },      
-      ).forRoutes(UserController)
-    consumer.apply(UserAuthMiddleware).exclude(
-      { path: 'course', method: RequestMethod.GET }
-    
-    ).forRoutes(CourseController)
+      .exclude({ path: 'course', method: RequestMethod.GET })
+      .forRoutes(CourseController);
   }
 }

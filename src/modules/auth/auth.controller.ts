@@ -49,7 +49,7 @@ export class AuthController {
       delete newUser['password'];
       const accessToken =
         await this.authService.generateAccessTokenUser(newUser);
-      return res.status(HttpStatus.CREATED).send(newUser);
+      return res.status(HttpStatus.CREATED).send({ newUser, accessToken });
     } catch (error) {
       throw new BadRequestException(error);
     }

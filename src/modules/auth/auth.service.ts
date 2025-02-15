@@ -4,12 +4,9 @@ import { UserPayloadDto } from './dto/user-payload';
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private jwtService: JwtService,
-  ) {}
+  constructor(private jwtService: JwtService) {}
 
   generateAccessTokenUser(user: UserPayloadDto) {
-    console.log(process.env.USER_SECRET_KEY)
     const jwtToken = this.jwtService.sign(
       { _id: user._id.toString(), username: user.username, email: user.email },
       {
